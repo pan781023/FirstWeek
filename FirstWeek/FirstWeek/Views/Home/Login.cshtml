@@ -1,0 +1,26 @@
+﻿@model FirstWeek.Models.LoginViewModels
+
+@{
+	ViewBag.Title = "Login";
+}
+
+<h2>Logon</h2>
+@using (Html.BeginForm("Login", "Home"))
+{
+
+	@Html.TextBoxFor(m => m.account, new { @class = "form-control" })
+	@Html.ValidationMessageFor(m => m.account)
+	<br />
+	@Html.PasswordFor(m => m.password, new { @class = "form-control" })
+	@Html.ValidationMessageFor(m => m.password)
+	<br />
+
+			<input type="submit" value="登入" />
+
+}
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
+
+

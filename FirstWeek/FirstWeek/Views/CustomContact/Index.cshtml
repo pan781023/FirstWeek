@@ -6,9 +6,16 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@*<p>*@
+    @*@Html.ActionLink("Create New", "Create")*@
+	@using (Html.BeginForm("Index", "CustomContact", FormMethod.Post))
+	{
+		<div class="form-inline">
+			Search: @Html.TextBox("SearchString", "", new { @class = "form-control" })
+			<input type="submit" value="search" class="btn btn-primary" />
+		</div>
+	}
+@*</p>*@
 <table class="table">
     <tr>
         <th>

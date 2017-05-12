@@ -4,16 +4,25 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FirstWeek.Models;
+using System.Web.Security;
 
 namespace FirstWeek.Controllers
 {
-    public class CustomDataController : Controller
+	[Authorize]
+	public class CustomDataController : Controller
     {
         客戶資料Entities DB = new 客戶資料Entities();
-        // GET: CustomData
-        public ActionResult Index()
+		// GET: CustomData
+		
+		public ActionResult Index(string SearchString)
         {
-            return View(DB.客戶資料.ToList());
+			var data = from u in DB.客戶資料 where u.isDeleted ==false select u;
+			if (SearchString !=null)
+			{
+				data = data.Where(x => x.客戶名稱.Contains(SearchString) || x.地址.Contains(SearchString));
+			}
+
+			return View(data.ToList());
         }
         public ActionResult Create()
         {
@@ -56,8 +65,16 @@ namespace FirstWeek.Controllers
         [HttpPost,ActionName("Delete")]
         public ActionResult DeleteOK(int id)
         {
-            DB.客戶資料.Remove(DB.客戶資料.Find(id));
-            try
+			//DB.客戶資料.Remove(DB.客戶資料.Find(id));
+			var Data = DB.客戶資料.Where(x => x.Id == id).FirstOrDefault();
+			Data.isDeleted = true;
+			Data.客戶聯絡人.Where(x => x.客戶Id == id).FirstOrDefault().isDeleted = true;
+			Data.客戶銀行資訊.Where(x => x.客戶Id == id).FirstOrDefault().isDeleted = true;
+			//var Data2 = DB.客戶聯絡人.Where(x => x.Id == id).FirstOrDefault();
+			//Data2.isDeleted = true;
+			//var Data3 = DB.客戶聯絡人.Where(x => x.Id == id).FirstOrDefault();
+			//Data3.isDeleted = true;
+			try
             {
                 DB.SaveChanges();
             }
@@ -91,9 +108,20 @@ namespace FirstWeek.Controllers
                 Data.傳真 = Customer.傳真;
                 Data.地址 = Customer.地址;
                 Data.Email = Customer.Email;
-                return RedirectToAction("Index");
+				try
+				{
+					DB.SaveChanges();
+				}
+				catch (Exception ex)
+				{
+					throw ex;
+				}
+				return RedirectToAction("Index");
+				
             }
             return View(Customer);
         }
+		
+		
     }
 }

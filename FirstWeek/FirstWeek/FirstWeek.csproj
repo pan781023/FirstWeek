@@ -175,12 +175,23 @@
     <Compile Include="Controllers\CustomDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\客戶資料Controller.cs" />
+    <Compile Include="Controllers\ViewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CustomPartial.cs" />
+    <Compile Include="Models\CoustomView.cs">
+      <DependentUpon>客戶資料.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoginViewModels.cs" />
+    <Compile Include="Models\Validate\myphoneAttribute.cs" />
+    <Compile Include="Models\客戶聯絡人Partial.cs" />
+    <Compile Include="Models\客戶資料1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>客戶資料.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\客戶資料Partial.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\客戶聯絡人.cs">
@@ -202,6 +213,7 @@
     <Compile Include="Models\客戶銀行資訊.cs">
       <DependentUpon>客戶資料.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\客戶銀行資訊Partial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -287,11 +299,19 @@
     <Content Include="Views\CustomData\Index.cshtml" />
     <Content Include="Views\CustomData\Details.cshtml" />
     <Content Include="Views\CustomData\Delete.cshtml" />
+    <Content Include="Views\CustomData\Edit.cshtml" />
+    <Content Include="Views\CustomBankInfo\Index.cshtml" />
+    <Content Include="Views\CustomBankInfo\Create.cshtml" />
+    <Content Include="Views\CustomBankInfo\Delete.cshtml" />
+    <Content Include="Views\CustomBankInfo\Edit.cshtml" />
+    <Content Include="Views\CustomBankInfo\Details.cshtml" />
+    <Content Include="Views\CustomContact\Delete.cshtml" />
+    <Content Include="Views\CustomContact\Details.cshtml" />
+    <Content Include="Views\CustomContact\Edit.cshtml" />
+    <Content Include="Views\View\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\CustomBankInfo\" />
-    <Folder Include="Views\客戶資料\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
